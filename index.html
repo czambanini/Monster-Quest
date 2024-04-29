@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matador de Monstro</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/vue@2"></script>
+</head>
+<body>
+    <div id="app">
+        <div class="panel">
+            <div class="header">
+                <h1>+ Monster Quest +</h1>
+            </div>
+    
+            <div class="energy">
+                <div class="duelist">
+                    <img class="figure" src="assets/mago.png">
+                    <div class="hp-bar">
+                        <h2>Player</h2>
+                        <div class="hp-bar-border"><div class="hp-bar-amount" :style="[{width: playerHpAmount + '%'}, {backgroundColor: playerHpColor}]"></div></div>
+                        <p class="hp-number"> {{ playerHpAmount }}</p>
+                    </div>
+                </div>
+                <div class="duelist">
+                    <img class="figure" src="assets/monstro.png">
+                    <div class="hp-bar">
+                        <h2>Monster</h2>
+                        <div class="hp-bar-border"><div class="hp-bar-amount" :style="[{width: monsterHpAmount + '%'}, {backgroundColor: monsterHpColor}]"></div></div>
+                        <p class="hp-number"> {{ monsterHpAmount }}</p>
+                    </div>
+                </div>
+            </div>
+    
+            
+    
+            <div class="buttons">
+                <div v-if="showButtons" class="actions">
+                    <button @click="attack(false)" class="attack-button">Attack</button>
+                    <button @click="attack(true)" class="attack-button">Special Attack</button>
+                    <button @click="cure" class="cure-button">Cure</button>
+                    <button @click="restartGame()" class="run-button">Run!</button>
+                </div>
+                <div v-else class="restart">
+                    <h2 class="result">{{ winner }}</h2>
+
+                    <button @click="restartGame()" class="run-button">Start Again</button>
+                </div>
+            </div>
+        </div>
+
+        <div v-if="logs.length"  class="panel logs">
+            <ul>
+                <li v-for="log in logs" :class="log.dealer">{{ log.text }}</li>
+            </ul>
+        </div>
+
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
